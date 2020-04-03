@@ -231,6 +231,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'User Management',
+    icon: 'people-outline',
+    link: '/pages/user-management'
+  },
+  {
     title: 'Auth',
     icon: 'lock-outline',
     children: [

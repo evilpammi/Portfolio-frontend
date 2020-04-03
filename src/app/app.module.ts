@@ -21,6 +21,9 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 
+import { UserService } from './services/user.service';
+import { RoleService } from './services/role.service';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -43,6 +46,10 @@ import {
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
+  providers: [
+    UserService,
+    RoleService
+  ]
 })
 export class AppModule {
 }

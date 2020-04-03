@@ -10,4 +10,5 @@
 
 export const environment = {
   production: false,
+  frontend_api_path: "http://localhost:8080"
 };

@@ -1,0 +1,156 @@
+<nb-card>
+  <nb-card-header>Users</nb-card-header>
+  <nb-card-body>
+    <div class="form-group">
+      <button nbButton status="primary" size="small" (click)="openModal('add', $event, addContent)">Add</button>
+    </div>
+    <ng2-smart-table [settings]="settings" [source]="users" 
+       (edit)="openModal('edit', $event, editContent)" (delete)="openModal('delete', $event, deleteContent)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<ng-template #addContent let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>Add User</nb-card-header>
+    <nb-card-body>
+      <form>
+        <div class="form-group">
+          <label for="inputUsername" class="label">Username</label>
+          <input type="text" nbInput fullWidth fieldSize="small" id="inputUsername" [(ngModel)]="user.user_name" #user_name="ngModel" name="user_name" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="label">Password</label>
+          <input type="password" nbInput fullWidth fieldSize="small" id="inputPassword" [(ngModel)]="user.user_password" #user_password="ngModel" name="user_password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="inputEmail" class="label">Email address</label>
+          <input type="email" nbInput fullWidth fieldSize="small" id="inputEmail" [(ngModel)]="user.user_email" #user_email="ngModel" name="user_email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="inputFName" class="label">First Name</label>
+          <input type="text" nbInput fullWidth fieldSize="small" id="inputFName" [(ngModel)]="user.user_fname" #user_fname="ngModel" name="user_fname" placeholder="First Name">
+        </div>
+        <div class="form-group">
+          <label for="inputLName" class="label">Last Name</label>
+          <input type="text" nbInput fullWidth fieldSize="small" id="inputLName" [(ngModel)]="user.user_lname" #user_lname="ngModel" name="user_lname" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+          <label for="inputRole" class="label mr-3">Role</label>
+          <nb-select fieldSize="small" id="inputRole" [(ngModel)]="user.role_id" #role_id="ngModel" name="role_id">
+            <nb-option value="1">Admin</nb-option>
+            <nb-option value="2">User</nb-option>
+          </nb-select>
+        </div>
+        <div class="form-group">
+          <nb-checkbox [checked]="checked" (checkedChange)="activeChanged($event)">Active</nb-checkbox>
+        </div>
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton status="success" size="small" class="mx-1" (click)="save('add')">Submit</button>
+        <button nbButton outline status="danger" size="small" class="mx-1" (click)="ref.close();">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #editContent let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>Edit User</nb-card-header>
+    <nb-card-body>
+      <form>
+        <div class="form-group">
+          <label for="inputUsername" class="label">Username</label>
+          <input type="text" nbInput fullWidth fieldSize="small" id="inputUsername" [(ngModel)]="user.user_name" #user_name="ngModel" name="user_name" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="label">Password</label>
+          <input type="password" nbInput fullWidth fieldSize="small" id="inputPassword" [(ngModel)]="user.user_password" #user_password="ngModel" name="user_password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="inputEmail" class="label">Email address</label>
+          <input type="email" nbInput fullWidth fieldSize="small" id="inputEmail" [(ngModel)]="user.user_email" #user_email="ngModel" name="user_email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="inputFName" class="label">First Name</label>
+          <input type="text" nbInput fullWidth fieldSize="small" id="inputFName" [(ngModel)]="user.user_fname" #user_fname="ngModel" name="user_fname" placeholder="First Name">
+        </div>
+        <div class="form-group">
+          <label for="inputLName" class="label">Last Name</label>
+          <input type="text" nbInput fullWidth fieldSize="small" id="inputLName" [(ngModel)]="user.user_lname" #user_lname="ngModel" name="user_lname" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+          <label for="inputRole" class="label mr-3">Role</label>
+          <nb-select fieldSize="small" selected="1" id="inputRole" [(ngModel)]="user.role_id" #role_id="ngModel" name="role_id">
+            <nb-option value="1">Admin</nb-option>
+            <nb-option value="2">User</nb-option>
+          </nb-select>
+        </div>
+        <div class="form-group">
+          <nb-checkbox [checked]="checked" (checkedChange)="activeChanged($event)">Active</nb-checkbox>
+        </div>
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton status="success" size="small" class="mx-1" (click)="save('edit')">Submit</button>
+        <button nbButton outline status="danger" size="small" class="mx-1" (click)="ref.close();">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #deleteContent let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>Delete User</nb-card-header>
+    <nb-card-body>
+      <form>
+        <p>Confirm to delete this user.</p>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputUsername" class="label">Username</label>
+              <p>{{ user.user_name }}</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputEmail" class="label">Email address</label>
+              <p>{{ user.user_email }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputFName" class="label">First Name</label>
+              <p>{{ user.user_fname }}</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputLName" class="label">Last Name</label>
+              <p>{{ user.user_lname }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputRole" class="label mr-3">Role</label>
+              <p>{{ user.role_name }}</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputStatus" class="label mr-3">Status</label>
+              <p>{{ user.user_status }}</p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton status="danger" size="small" class="mx-1" (click)="save('delete')">Delete</button>
+        <button nbButton outline status="danger" size="small" class="mx-1" (click)="ref.close();">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
