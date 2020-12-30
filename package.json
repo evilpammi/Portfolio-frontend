@@ -73,7 +73,7 @@
     "tinymce": "4.5.7",
     "tslib": "1.9.0",
     "typeface-exo": "0.0.22",
-    "vega": "5.9.2",
+    "vega": "5.17.3",
     "vega-embed": "6.3.2",
     "vega-lite": "4.5.1",
     "web-animations-js": "github:angular/web-animations-js#release_pr208",
